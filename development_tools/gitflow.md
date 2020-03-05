@@ -12,15 +12,15 @@
 
 然后，开发者发布修改到正式项目中，开发者要把本地`master`分支的修改『推』到中央仓库中。这相当于`svn commit`操作，但`push`操作会把所有还不在中央仓库的本地提交都推上去。
 
-![image-20200226171301103](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226171301103.png)
+![image-20200226171301103](../../image/image-20200226171301103.png)
 
 ### 1.2 冲突解决
 
 中央仓库代表了正式项目，所以提交历史应该被尊重且是稳定不变的。如果开发者本地的提交历史和中央仓库有分歧，`Git`会拒绝`push`提交否则会覆盖已经在中央库的正式提交。
 
-![image-20200226171417409](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226171417409.png)
+![image-20200226171417409](../../image/image-20200226171417409.png)
 
-在开发者提交自己功能修改到中央库前，需要先`fetch`在中央库的新增提交，`rebase`自己提交到中央库提交历史之上。 这样做的意思是在说，『我要把自己的修改加到别人已经完成的修改上。』最终的结果是一个完美的线性历史，就像以前的`SVN`的工作流中一样。
+在开发者提交自己功能修改到中央库前，需要先`fetch`在中央库的新增提交，`rebase`自己提交到中央库提交历史之上。 这样做的意思是在说，『我要把自己的修改加到别人已经完成的修改上。』最终的结果是一个完美的线性历史，就像以前的`SVN`的工作流中一样。 
 
 如果本地修改和上游提交有冲突，`Git`会暂停`rebase`过程，给你手动解决冲突的机会。`Git`解决合并冲突，用和生成提交一样的[`git status`](https://www.atlassian.com/git/tutorial/git-basics#!status)和[`git add`](https://www.atlassian.com/git/tutorial/git-basics#!add)命令，很一致方便。还有一点，如果解决冲突时遇到麻烦，`Git`可以很简单中止整个`rebase`操作，重来一次（或者让别人来帮助解决）。
 
@@ -109,7 +109,7 @@ git pull --rebase origin master
 
 `--rebase`选项告诉`Git`把小红的提交移到同步了中央仓库修改后的`master`分支的顶部，如下图所示：
 
-![image-20200226173135094](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226173135094.png)
+![image-20200226173135094](../../image/image-20200226173135094.png)
 
 如果你忘加了这个选项，`pull`操作仍然可以完成，但每次`pull`操作要同步中央仓库中别人修改时，提交历史会以一个多余的『合并提交』结尾。 对于集中式工作流，最好是使用`rebase`而不是生成一个合并提交。用`rebase`后相当于只有最初的一次`push`提交（**待确认**）
 
@@ -123,7 +123,7 @@ git pull --rebase origin master
 CONFLICT (content): Merge conflict in <some-file>
 ```
 
-![image-20200226173516598](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226173516598.png)
+![image-20200226173516598](../../image/image-20200226173516598.png)
 
 `Git`很赞的一点是，任何人可以解决他自己的冲突。在这个例子中，小红可以简单的运行[`git status`](https://www.atlassian.com/git/tutorial/git-basics#!status)命令来查看哪里有问题。 冲突文件列在`Unmerged paths`（未合并路径）一节中：
 
@@ -138,7 +138,7 @@ CONFLICT (content): Merge conflict in <some-file>
 接着小红编辑这些文件。修改完成后，用老套路暂存这些文件，并让[`git rebase`](https://www.atlassian.com/git/tutorial/rewriting-git-history#!rebase)完成剩下的事：
 
 ```
-git add <some-file>
+git add <some-file> 
 git rebase --continue
 ```
 
@@ -173,7 +173,7 @@ git push origin master
 
 功能分支工作流以集中式工作流为基础，不同的是为各个新功能分配一个专门的分支来开发。这样可以在把新功能集成到正式项目前，用`Pull Requests`的方式讨论变更。
 
-![image-20200226180626922](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226180626922.png)
+![image-20200226180626922](../../image/image-20200226180626922.png)
 
 一旦你玩转了[集中式工作流](https://github.com/xirong/my-git/blob/master/workflow-centralized.md)，在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。
 
@@ -205,7 +205,7 @@ git push origin master
 
 #### 小红开始开发一个新功能
 
-![image-20200226195430062](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226195430062.png)
+![image-20200226195430062](../../image/image-20200226195430062.png)
 
 在开始开发功能前，小红需要一个独立的分支。使用下面的命令[新建一个分支](https://www.atlassian.com/git/tutorial/git-branches#!checkout)：
 
@@ -282,7 +282,7 @@ git push
 
 `Gitflow`工作流通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。
 
-![image-20200226201101141](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226201101141.png)
+![image-20200226201101141](../../image/image-20200226201101141.png)
 
 这节介绍的[`Gitflow`工作流](http://nvie.com/posts/a-successful-git-branching-model/)借鉴自在[nvie](http://nvie.com/)的*Vincent Driessen*。
 
@@ -298,19 +298,19 @@ git push
 
 相对于使用仅有的一个`master`分支，`Gitflow`工作流使用两个分支来记录项目的历史。`master`分支存储了正式发布的历史，而`develop`分支作为功能的集成分支。 这样也方便`master`分支上的所有提交分配一个版本号。
 
-![image-20200226201242827](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226201242827.png)
+![image-20200226201242827](../../image/image-20200226201242827.png)
 
 ### 3.3 功能分支
 
 每个新功能位于一个自己的分支，这样可以[`push`到中央仓库以备份和协作](https://www.atlassian.com/git/tutorial/remote-repositories#!push)。 但功能分支不是从`master`分支上拉出新分支，而是使用`develop`分支作为父分支。当新功能完成时，[合并回`develop`分支](https://www.atlassian.com/git/tutorial/git-branches#!merge)。 新功能提交应该从不直接与`master`分支交互。
 
-![image-20200226201336568](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226201336568.png)
+![image-20200226201336568](../../image/image-20200226201336568.png)
 
 注意，从各种含义和目的上来看，功能分支加上`develop`分支就是功能分支工作流的用法。但`Gitflow`工作流没有在这里止步。
 
 ### 3.4 发布分支
 
-![image-20200226201412729](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226201412729.png)
+![image-20200226201412729](../../image/image-20200226201412729.png)
 
 一旦`develop`分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从`develop`分支上`checkout`一个发布分支。 新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上—— **这个分支只应该做`Bug`修复**、**文档生成和其它面向发布任务**。 一旦对外发布的工作都完成了，**发布分支合并到`master`分支并分配一个版本号打好`Tag`**。 另外，**这些从新建发布分支以来的做的修改要合并回`develop`分支。**
 
@@ -326,7 +326,7 @@ git push
 
 ### 3.5 维护分支
 
-![image-20200226201712168](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226201712168.png)
+![image-20200226201712168](../../image/image-20200226201712168.png)
 
 维护分支或说是热修复（`hotfix`）分支用于给产品发布版本（`production releases`）快速生成补丁，这是唯一可以直接从`master`分支`fork`出来的分支。 修复完成，修改应该马上合并回`master`分支和`develop`分支（当前的发布分支），`master`分支应该用新的版本号打好`Tag`。
 
@@ -336,7 +336,7 @@ git push
 
 #### 创建开发分支
 
-![image-20200226201939182](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226201939182.png)
+![image-20200226201939182](../../image/image-20200226201939182.png)
 
 第一步为`master`分支配套一个`develop`分支。简单来做可以[本地创建一个空的`develop`分支](https://www.atlassian.com/git/tutorial/git-branches#!branch)，`push`到服务器上：
 
@@ -357,7 +357,7 @@ git checkout -b develop origin/develop
 
 #### 小红和小明开始开发新功能
 
-![image-20200226202129292](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226202129292.png)
+![image-20200226202129292](../../image/image-20200226202129292.png)
 
 这个示例中，小红和小明开始各自的功能开发。他们需要为各自的功能创建相应的分支。新分支不是基于`master`分支，而是应该[基于`develop`分支](https://www.atlassian.com/git/tutorial/git-branches#!checkout)：
 
@@ -375,7 +375,7 @@ git commit
 
 #### 小红完成功能开发
 
-![image-20200226202157382](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226202157382.png)
+![image-20200226202157382](../../image/image-20200226202157382.png)
 
 添加了提交后，小红觉得她的功能OK了。如果团队使用`Pull Requests`，这时候可以发起一个用于合并到`develop`分支。 否则她可以直接合并到她本地的`develop`分支后`push`到中央仓库：
 
@@ -391,7 +391,7 @@ git branch -d some-feature
 
 #### 小红开始准备发布
 
-![image-20200226202315536](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226202315536.png)
+![image-20200226202315536](../../image/image-20200226202315536.png)
 
 这个时候小明正在实现他的功能，小红开始准备她的第一个项目正式发布。 像功能开发一样，她用一个新的分支来做发布准备。这一步也确定了发布的版本号：
 
@@ -405,7 +405,7 @@ git checkout -b release-0.1 develop
 
 #### 小红完成发布
 
-![image-20200226202519071](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226202519071.png)
+![image-20200226202519071](../../image/image-20200226202519071.png)
 
 一旦准备好了对外发布，小红合并修改到`master`分支和`develop`分支上，删除发布分支。合并回`develop`分支很重要，因为在发布分支中已经提交的更新需要在后面的新功能中也要是可用的。 另外，如果小红的团队要求`Code Review`，这是一个发起`Pull Request`的理想时机。
 
@@ -430,7 +430,7 @@ git push --tags
 
 #### 最终用户发现`Bug`
 
-![image-20200226202708710](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226202708710.png)
+![image-20200226202708710](../../image/image-20200226202708710.png)
 
 对外版本发布后，小红小明一起开发下一版本的新功能，直到有最终用户开了一个`Ticket`抱怨当前版本的一个`Bug`。 为了处理`Bug`，小红（或小明）从`master`分支上拉出了一个维护分支，提交修改以解决问题，然后直接合并回`master`分支：
 
@@ -461,7 +461,7 @@ git branch -d issue-#001
 
 `Forking`工作流和前面讨论的几种工作流有根本的不同，这种工作流不是使用单个服务端仓库作为『中央』代码基线，而让各个开发者都有一个服务端仓库。这意味着各个代码贡献者有2个`Git`仓库而不是1个：一个本地私有的，另一个服务端公开的。
 
-![image-20200226202849154](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200226202849154.png)
+![image-20200226202849154](../../image/image-20200226202849154.png)
 
 `Forking`工作流的一个主要优势是，贡献的代码可以被集成，而不需要所有人都能`push`代码到仅有的中央仓库中。 开发者`push`到自己的服务端仓库，而只有项目维护者才能`push`到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。
 
@@ -491,7 +491,7 @@ git branch -d issue-#001
 
 #### 项目维护者初始化正式仓库
 
-![image-20200305143724888](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305143724888.png)
+![image-20200305143724888](../../image/image-20200305143724888.png)
 
 和任何使用`Git`项目一样，第一步是创建在服务器上一个正式仓库，让所有团队成员都可以访问到。 通常这个仓库也会作为项目维护者的公开仓库。
 
@@ -506,7 +506,7 @@ git init --bare /path/to/repo.git
 
 #### 开发者`fork`正式仓库
 
-![image-20200305143736165](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305143736165.png)
+![image-20200305143736165](../../image/image-20200305143736165.png)
 
 其它所有的开发需要`fork`正式仓库。 可以用`git clone`命令[用`SSH`协议连通到服务器](https://confluence.atlassian.com/display/BITBUCKET/Set+up+SSH+for+Git)， 拷贝仓库到服务器另一个位置 —— 是的，`fork`操作基本上就只是一个服务端的克隆。 `Bitbucket`和`Stash`上可以点一下按钮就让开发者完成仓库的`fork`操作。
 
@@ -514,7 +514,7 @@ git init --bare /path/to/repo.git
 
 #### 开发者克隆自己`fork`出来的仓库
 
-![image-20200305143807238](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305143807238.png)
+![image-20200305143807238](../../image/image-20200305143807238.png)
 
 下一步，各个开发者要克隆自己的公开仓库，用熟悉的`git clone`命令。
 
@@ -540,7 +540,7 @@ git remote add upstream https://user@bitbucket.org/maintainer/repo.git
 
 #### 开发者开发自己的功能
 
-![image-20200305144431174](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305144431174.png)
+![image-20200305144431174](../../image/image-20200305144431174.png)
 
 在刚克隆的本地仓库中，开发者可以像其它工作流一样的编辑代码、[提交修改](https://www.atlassian.com/git/tutorial/git-basics#!commit)和[新建分支](https://www.atlassian.com/git/tutorial/git-branches#!branch)：
 
@@ -579,11 +579,11 @@ git pull upstream master
 
 `Pull requests`是`Bitbucket`提供的让开发者更方便地进行协作的功能，提供了友好的`Web`界面可以在提议的修改合并到正式项目之前对修改进行讨论。
 
-![image-20200305150301855](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305150301855.png)
+![image-20200305150301855](../../image/image-20200305150301855.png)
 
 ​																						bitbucket
 
-![image-20200305150358476](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305150358476.png)
+![image-20200305150358476](../../image/image-20200305150358476.png)
 
 ​																							github
 
@@ -591,7 +591,7 @@ git pull upstream master
 
 但是，`Pull Request`远不止一个简单的通知，而是为讨论提交的功能的一个专门论坛。 如果变更有任何问题，团队成员反馈在`Pull Request`中，甚至`push`新的提交微调功能。 所有的这些活动都直接跟踪在`Pull Request`中。
 
-![image-20200305150444026](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305150444026.png)
+![image-20200305150444026](../../image/image-20200305150444026.png)
 
 相比其它的协作模型，这种分享提交的形式有助于打造一个更流畅的工作流。 `SVN`和`Git`都能通过一个简单的脚本收到通知邮件；但是，讨论变更时，开发者通常只能去回复邮件。 这样做会变得杂乱，尤其还要涉及后面的几个提交时。 `Pull Requests`把所有相关功能整合到一个和`Bitbucket`仓库界面集成的用户友好`Web`界面中。
 
@@ -599,7 +599,7 @@ git pull upstream master
 
 当要发起一个`Pull Request`，你所要做的就是请求（`Request`）另一个开发者（比如项目的维护者） 来`pull`你仓库中一个分支到他的仓库中。这意味着你要提供4个信息以发起`Pull Request`： 源仓库、源分支、目的仓库、目的分支。
 
-![image-20200305150540193](C:\Users\kk\AppData\Roaming\Typora\typora-user-images\image-20200305150540193.png)
+![image-20200305150540193](../../image/image-20200305150540193.png)
 
 这几值多数`Bitbucket`都会设置上合适的缺省值。但取决你用的协作工作流，你的团队可能会要指定不同的值。 上图显示了一个`Pull Request`请求合并一个功能分支到正式的`master`分支上，但可以有多种不同的`Pull Request`用法。
 
