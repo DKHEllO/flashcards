@@ -30,7 +30,7 @@ $ git checkout origin/branch-2.7
   - GCC 4.6 or later.
   - Clang 3.4 or later.
   - MSVC 2013. Refer to [Open vSwitch on Windows](http://docs.openvswitch.org/en/latest/intro/install/windows/) for additional Windows build instructions.
-  虽然OVS可能与其他编译器兼容，但是可能缺少对原子操作的最佳支持，这使得OVS非常慢(请参阅lib/ OVS -  atom .h)
+    虽然OVS可能与其他编译器兼容，但是可能缺少对原子操作的最佳支持，这使得OVS非常慢(请参阅lib/ OVS -  atom .h)
 - libssl, from OpenSSL，该库是可选的但是推荐安装。如果你计划将OVS连接到OpenFlow控制器，则推荐使用。需要libssl保证OVS到OpenFlow控制器的连接的机密性和真实性。如果安装了libssl，那么Open vSwitch将自动构建并支持它。
 - libcap-ng，该库是可选的但是推荐安装。它可以让非root用户不需要以root用户权限来运行OVS守护进程。如果安装了libcap-ng，那么Open vSwitch将自动构建并支持它。
 - Python 3.4 or later.
@@ -51,6 +51,7 @@ $ git checkout origin/branch-2.7
   要使用Open vSwitch对TAP设备的支持，您必须启用CONFIG_TUN。
 
 - 要构建内核模块，需要使用与构建内核相同的GCC版本
+
 - 与模块要运行的Linux内核映像对应的内核构建目录。例如，在Debian和Ubuntu下，每个包含内核二进制文件的linux-image包都有一个对应的linux-headers包，该包具有所需的构建基础结构。
 
 如果您使用的是Git或snapshot(而不是发布包)，或者修改了Open vSwitch构建系统或数据库schema，那么您还需要以下依赖：
@@ -341,7 +342,7 @@ $ ovs-vsctl --no-wait init
 $ ovs-vswitchd --pidfile --detach --log-file
 ```
 
-## 七、Validating
+## 八、Validating
 
 验证是否安装成功：
 
@@ -359,3 +360,8 @@ $ ovs-vsctl add-port br0 vif1.0
 $ docker exec -it <ovsdb-server/ovs-vswitchd> /bin/bash
 ```
 
+## 九、补充
+
+各版本对应的内核
+
+![image-20200305205650206](../../image/image-20200305205650206.png)
