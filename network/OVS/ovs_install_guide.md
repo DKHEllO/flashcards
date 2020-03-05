@@ -354,6 +354,14 @@ $ ovs-vsctl add-port br0 vif1.0
 
 有关详细信息，请参阅ovs-vsctl(8)。您也可以参考 [Testing](http://docs.openvswitch.org/en/latest/topics/testing/)以获得关于OVS的更一般测试的信息。
 
+端口的名称应该是一个使用ifconfig查看的exist接口，例如eth0。如果你只是想使用一个虚拟端口名来进行测试，那么您应该指定端口的类型，如：
+
+```
+$ ovs-vsctl add-port br0 port0 -- set Interface port0 type=internal
+or
+$ ovs-vsctl set Interface port0 type=internal
+```
+
 当在容器中使用ovs时，exec to容器运行以上命令:
 
 ```
