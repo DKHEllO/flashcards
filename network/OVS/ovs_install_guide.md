@@ -336,7 +336,7 @@ $ ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
 $ ovs-vsctl --no-wait init
 ```
 
-启动主打开vSwitch守护进程，告诉它连接到相同的Unix域socket:
+启动OpenvSwitch守护进程，告诉它连接到相同的Unix域socket:
 
 ```
 $ ovs-vswitchd --pidfile --detach --log-file
@@ -372,4 +372,8 @@ $ docker exec -it <ovsdb-server/ovs-vswitchd> /bin/bash
 
 各版本对应的内核
 
-![image-20200305205650206](../../image/image-20200305205650206.png)
+![image-20200305205650206](https://raw.githubusercontent.com/DKHEllO/flashcards/develop/image/image-20200305205650206.png)
+
+各版本支持的OpenFlow协议
+
+![image-20200307223451737](https://raw.githubusercontent.com/DKHEllO/flashcards/develop/image/image-20200307223451737.png)

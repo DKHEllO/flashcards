@@ -12,13 +12,13 @@
 
 然后，开发者发布修改到正式项目中，开发者要把本地`master`分支的修改『推』到中央仓库中。这相当于`svn commit`操作，但`push`操作会把所有还不在中央仓库的本地提交都推上去。
 
-![image-20200226171301103](../../image/image-20200226171301103.png)
+![image-20200226171301103](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226171301103.png)
 
 ### 1.2 冲突解决
 
 中央仓库代表了正式项目，所以提交历史应该被尊重且是稳定不变的。如果开发者本地的提交历史和中央仓库有分歧，`Git`会拒绝`push`提交否则会覆盖已经在中央库的正式提交。
 
-![image-20200226171417409](../../image/image-20200226171417409.png)
+![image-20200226171417409](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226171417409.png)
 
 在开发者提交自己功能修改到中央库前，需要先`fetch`在中央库的新增提交，`rebase`自己提交到中央库提交历史之上。 这样做的意思是在说，『我要把自己的修改加到别人已经完成的修改上。』最终的结果是一个完美的线性历史，就像以前的`SVN`的工作流中一样。 
 
@@ -109,7 +109,7 @@ git pull --rebase origin master
 
 `--rebase`选项告诉`Git`把小红的提交移到同步了中央仓库修改后的`master`分支的顶部，如下图所示：
 
-![image-20200226173135094](../../image/image-20200226173135094.png)
+![image-20200226173135094](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226173135094.png)
 
 如果你忘加了这个选项，`pull`操作仍然可以完成，但每次`pull`操作要同步中央仓库中别人修改时，提交历史会以一个多余的『合并提交』结尾。 对于集中式工作流，最好是使用`rebase`而不是生成一个合并提交。用`rebase`后相当于只有最初的一次`push`提交（**待确认**）
 
@@ -123,7 +123,7 @@ git pull --rebase origin master
 CONFLICT (content): Merge conflict in <some-file>
 ```
 
-![image-20200226173516598](../../image/image-20200226173516598.png)
+![image-20200226173516598](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226173516598.png)
 
 `Git`很赞的一点是，任何人可以解决他自己的冲突。在这个例子中，小红可以简单的运行[`git status`](https://www.atlassian.com/git/tutorial/git-basics#!status)命令来查看哪里有问题。 冲突文件列在`Unmerged paths`（未合并路径）一节中：
 
@@ -173,7 +173,7 @@ git push origin master
 
 功能分支工作流以集中式工作流为基础，不同的是为各个新功能分配一个专门的分支来开发。这样可以在把新功能集成到正式项目前，用`Pull Requests`的方式讨论变更。
 
-![image-20200226180626922](../../image/image-20200226180626922.png)
+![image-20200226180626922](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226180626922.png)
 
 一旦你玩转了[集中式工作流](https://github.com/xirong/my-git/blob/master/workflow-centralized.md)，在开发过程中可以很简单地加上功能分支，用来鼓励开发者之间协作和简化交流。
 
@@ -205,7 +205,7 @@ git push origin master
 
 #### 小红开始开发一个新功能
 
-![image-20200226195430062](../../image/image-20200226195430062.png)
+![image-20200226195430062](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226195430062.png)
 
 在开始开发功能前，小红需要一个独立的分支。使用下面的命令[新建一个分支](https://www.atlassian.com/git/tutorial/git-branches#!checkout)：
 
@@ -282,7 +282,7 @@ git push
 
 `Gitflow`工作流通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。
 
-![image-20200226201101141](../../image/image-20200226201101141.png)
+![image-20200226201101141](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226201101141.png)
 
 这节介绍的[`Gitflow`工作流](http://nvie.com/posts/a-successful-git-branching-model/)借鉴自在[nvie](http://nvie.com/)的*Vincent Driessen*。
 
@@ -298,19 +298,19 @@ git push
 
 相对于使用仅有的一个`master`分支，`Gitflow`工作流使用两个分支来记录项目的历史。`master`分支存储了正式发布的历史，而`develop`分支作为功能的集成分支。 这样也方便`master`分支上的所有提交分配一个版本号。
 
-![image-20200226201242827](../../image/image-20200226201242827.png)
+![image-20200226201242827](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226201242827.png)
 
 ### 3.3 功能分支
 
 每个新功能位于一个自己的分支，这样可以[`push`到中央仓库以备份和协作](https://www.atlassian.com/git/tutorial/remote-repositories#!push)。 但功能分支不是从`master`分支上拉出新分支，而是使用`develop`分支作为父分支。当新功能完成时，[合并回`develop`分支](https://www.atlassian.com/git/tutorial/git-branches#!merge)。 新功能提交应该从不直接与`master`分支交互。
 
-![image-20200226201336568](../../image/image-20200226201336568.png)
+![image-20200226201336568](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226201336568.png)
 
 注意，从各种含义和目的上来看，功能分支加上`develop`分支就是功能分支工作流的用法。但`Gitflow`工作流没有在这里止步。
 
 ### 3.4 发布分支
 
-![image-20200226201412729](../../image/image-20200226201412729.png)
+![image-20200226201412729](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226201412729.png)
 
 一旦`develop`分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从`develop`分支上`checkout`一个发布分支。 新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上—— **这个分支只应该做`Bug`修复**、**文档生成和其它面向发布任务**。 一旦对外发布的工作都完成了，**发布分支合并到`master`分支并分配一个版本号打好`Tag`**。 另外，**这些从新建发布分支以来的做的修改要合并回`develop`分支。**
 
@@ -326,7 +326,7 @@ git push
 
 ### 3.5 维护分支
 
-![image-20200226201712168](../../image/image-20200226201712168.png)
+![image-20200226201712168](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226201712168.png)
 
 维护分支或说是热修复（`hotfix`）分支用于给产品发布版本（`production releases`）快速生成补丁，这是唯一可以直接从`master`分支`fork`出来的分支。 修复完成，修改应该马上合并回`master`分支和`develop`分支（当前的发布分支），`master`分支应该用新的版本号打好`Tag`。
 
@@ -336,7 +336,7 @@ git push
 
 #### 创建开发分支
 
-![image-20200226201939182](../../image/image-20200226201939182.png)
+![image-20200226201939182](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226201939182.png)
 
 第一步为`master`分支配套一个`develop`分支。简单来做可以[本地创建一个空的`develop`分支](https://www.atlassian.com/git/tutorial/git-branches#!branch)，`push`到服务器上：
 
@@ -357,7 +357,7 @@ git checkout -b develop origin/develop
 
 #### 小红和小明开始开发新功能
 
-![image-20200226202129292](../../image/image-20200226202129292.png)
+![image-20200226202129292](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226202129292.png)
 
 这个示例中，小红和小明开始各自的功能开发。他们需要为各自的功能创建相应的分支。新分支不是基于`master`分支，而是应该[基于`develop`分支](https://www.atlassian.com/git/tutorial/git-branches#!checkout)：
 
@@ -375,7 +375,7 @@ git commit
 
 #### 小红完成功能开发
 
-![image-20200226202157382](../../image/image-20200226202157382.png)
+![image-20200226202157382](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226202157382.png)
 
 添加了提交后，小红觉得她的功能OK了。如果团队使用`Pull Requests`，这时候可以发起一个用于合并到`develop`分支。 否则她可以直接合并到她本地的`develop`分支后`push`到中央仓库：
 
@@ -391,7 +391,7 @@ git branch -d some-feature
 
 #### 小红开始准备发布
 
-![image-20200226202315536](../../image/image-20200226202315536.png)
+![image-20200226202315536](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226202315536.png)
 
 这个时候小明正在实现他的功能，小红开始准备她的第一个项目正式发布。 像功能开发一样，她用一个新的分支来做发布准备。这一步也确定了发布的版本号：
 
@@ -405,7 +405,7 @@ git checkout -b release-0.1 develop
 
 #### 小红完成发布
 
-![image-20200226202519071](../../image/image-20200226202519071.png)
+![image-20200226202519071](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226202519071.png)
 
 一旦准备好了对外发布，小红合并修改到`master`分支和`develop`分支上，删除发布分支。合并回`develop`分支很重要，因为在发布分支中已经提交的更新需要在后面的新功能中也要是可用的。 另外，如果小红的团队要求`Code Review`，这是一个发起`Pull Request`的理想时机。
 
@@ -430,7 +430,7 @@ git push --tags
 
 #### 最终用户发现`Bug`
 
-![image-20200226202708710](../../image/image-20200226202708710.png)
+![image-20200226202708710](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226202708710.png)
 
 对外版本发布后，小红小明一起开发下一版本的新功能，直到有最终用户开了一个`Ticket`抱怨当前版本的一个`Bug`。 为了处理`Bug`，小红（或小明）从`master`分支上拉出了一个维护分支，提交修改以解决问题，然后直接合并回`master`分支：
 
@@ -461,7 +461,7 @@ git branch -d issue-#001
 
 `Forking`工作流和前面讨论的几种工作流有根本的不同，这种工作流不是使用单个服务端仓库作为『中央』代码基线，而让各个开发者都有一个服务端仓库。这意味着各个代码贡献者有2个`Git`仓库而不是1个：一个本地私有的，另一个服务端公开的。
 
-![image-20200226202849154](../../image/image-20200226202849154.png)
+![image-20200226202849154](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200226202849154.png)
 
 `Forking`工作流的一个主要优势是，贡献的代码可以被集成，而不需要所有人都能`push`代码到仅有的中央仓库中。 开发者`push`到自己的服务端仓库，而只有项目维护者才能`push`到正式仓库。 这样项目维护者可以接受任何开发者的提交，但无需给他正式代码库的写权限。
 
@@ -491,7 +491,7 @@ git branch -d issue-#001
 
 #### 项目维护者初始化正式仓库
 
-![image-20200305143724888](../../image/image-20200305143724888.png)
+![image-20200305143724888](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305143724888.png)
 
 和任何使用`Git`项目一样，第一步是创建在服务器上一个正式仓库，让所有团队成员都可以访问到。 通常这个仓库也会作为项目维护者的公开仓库。
 
@@ -506,7 +506,7 @@ git init --bare /path/to/repo.git
 
 #### 开发者`fork`正式仓库
 
-![image-20200305143736165](../../image/image-20200305143736165.png)
+![image-20200305143736165](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305143736165.png)
 
 其它所有的开发需要`fork`正式仓库。 可以用`git clone`命令[用`SSH`协议连通到服务器](https://confluence.atlassian.com/display/BITBUCKET/Set+up+SSH+for+Git)， 拷贝仓库到服务器另一个位置 —— 是的，`fork`操作基本上就只是一个服务端的克隆。 `Bitbucket`和`Stash`上可以点一下按钮就让开发者完成仓库的`fork`操作。
 
@@ -514,7 +514,7 @@ git init --bare /path/to/repo.git
 
 #### 开发者克隆自己`fork`出来的仓库
 
-![image-20200305143807238](../../image/image-20200305143807238.png)
+![image-20200305143807238](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305143807238.png)
 
 下一步，各个开发者要克隆自己的公开仓库，用熟悉的`git clone`命令。
 
@@ -540,7 +540,7 @@ git remote add upstream https://user@bitbucket.org/maintainer/repo.git
 
 #### 开发者开发自己的功能
 
-![image-20200305144431174](../../image/image-20200305144431174.png)
+![image-20200305144431174](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305144431174.png)
 
 在刚克隆的本地仓库中，开发者可以像其它工作流一样的编辑代码、[提交修改](https://www.atlassian.com/git/tutorial/git-basics#!commit)和[新建分支](https://www.atlassian.com/git/tutorial/git-branches#!branch)：
 
@@ -579,11 +579,11 @@ git pull upstream master
 
 `Pull requests`是`Bitbucket`提供的让开发者更方便地进行协作的功能，提供了友好的`Web`界面可以在提议的修改合并到正式项目之前对修改进行讨论。
 
-![image-20200305150301855](../../image/image-20200305150301855.png)
+![image-20200305150301855](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305150301855.png)
 
 ​																						bitbucket
 
-![image-20200305150358476](../../image/image-20200305150358476.png)
+![image-20200305150358476](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305150358476.png)
 
 ​																							github
 
@@ -591,7 +591,7 @@ git pull upstream master
 
 但是，`Pull Request`远不止一个简单的通知，而是为讨论提交的功能的一个专门论坛。 如果变更有任何问题，团队成员反馈在`Pull Request`中，甚至`push`新的提交微调功能。 所有的这些活动都直接跟踪在`Pull Request`中。
 
-![image-20200305150444026](../../image/image-20200305150444026.png)
+![image-20200305150444026](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305150444026.png)
 
 相比其它的协作模型，这种分享提交的形式有助于打造一个更流畅的工作流。 `SVN`和`Git`都能通过一个简单的脚本收到通知邮件；但是，讨论变更时，开发者通常只能去回复邮件。 这样做会变得杂乱，尤其还要涉及后面的几个提交时。 `Pull Requests`把所有相关功能整合到一个和`Bitbucket`仓库界面集成的用户友好`Web`界面中。
 
@@ -599,7 +599,7 @@ git pull upstream master
 
 当要发起一个`Pull Request`，你所要做的就是请求（`Request`）另一个开发者（比如项目的维护者） 来`pull`你仓库中一个分支到他的仓库中。这意味着你要提供4个信息以发起`Pull Request`： 源仓库、源分支、目的仓库、目的分支。
 
-![image-20200305150540193](../../image/image-20200305150540193.png)
+![image-20200305150540193](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200305150540193.png)
 
 这几值多数`Bitbucket`都会设置上合适的缺省值。但取决你用的协作工作流，你的团队可能会要指定不同的值。 上图显示了一个`Pull Request`请求合并一个功能分支到正式的`master`分支上，但可以有多种不同的`Pull Request`用法。
 
@@ -615,3 +615,165 @@ git pull upstream master
 
 本文后面内容说明，`Pull Request`在不同协作工作流中如何应用。
 
+## 5.3 在功能分支工作流中使用`Pull Request`
+
+功能分支工作流用一个共享的`Bitbucket`仓库来管理协作，开发者在专门的分支上开发功能。 但不是立即合并到`master`分支上，而是在合并到主代码库之前开发者应该开一个`Pull Request`发起功能的讨论。
+
+![image-20200306120046061](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120046061.png)
+
+功能分支工作流只有一个公开的仓库，所以`Pull Request`的目的仓库和源仓库总是同一个。 通常开发者会指定他的功能分支作为源分支，`master`分支作为目的分支。
+
+收到`Pull Request`后，项目维护者要决定如何做。如果功能没问题，就简单地合并到`master`分支，关闭`Pull Request`。 但如果提交的变更有问题，他可以在`Pull Request`中反馈。之后新加的提交也会评论之后接着显示出来。
+
+在功能还没有完全开发完的时候，也可能发起一个`Pull Request`。 比如开发者在实现某个需求时碰到了麻烦，他可以发一个包含正在进行中工作的`Pull Request`。 其它的开发者可以在`Pull Request`提供建议，或者甚至直接添加提交来解决问题。
+
+## 5.4 在`Gitflow`工作流中使用`Pull Request`
+
+`Gitflow`工作流和功能分支工作流类似，但围绕项目发布定义一个严格的分支模型。 在`Gitflow`工作流中使用`Pull Request`让开发者在发布分支或是维护分支上工作时， 可以有个方便的地方对关于发布分支或是维护分支的问题进行交流。
+
+![image-20200306120441499](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120441499.png)
+
+`Gitflow`工作流中`Pull Request`的使用过程和上一节中完全一致： 当一个功能、发布或是热修复分支需要`Review`时，开发者简单发起一个`Pull Request`， 团队的其它成员会通过`Bitbucket`收到通知。
+
+新功能一般合并到`develop`分支，而发布和热修复则要同时合并到`develop`分支和`master`分支上。 `Pull Request`可能用做所有合并的正式管理。
+
+## 5.5 在`Forking`工作流中使用`Pull Request`
+
+在`Forking`工作流中，开发者`push`完成的功能到他自己的仓库中，而不是共享仓库。 然后，他发起一个`Pull Request`，让项目维护者知道他的功能已经可以`Review`了。
+
+在这个工作流，`Pull Request`的通知功能非常有用， 因为项目维护者不可能知道其它开发者在他们自己的仓库添加了提交。
+
+![image-20200306120551604](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120551604.png)
+
+由于各个开发有自己的公开仓库，`Pull Request`的源仓库和目标仓库不是同一个。 源仓库是开发者的公开仓库，源分支是包含了修改的分支。 如果开发者要合并修改到正式代码库中，那么目标仓库是正式仓库，目标分支是`master`分支。
+
+`Pull Request`也可以用于正式项目之外的其它开发者之间的协作。 比如，如果一个开发者和一个团队成员一起开发一个功能，他们可以发起一个`Pull Request`， 用团队成员的`Bitbucket`仓库作为目标，而不是正式项目的仓库。 然后使用相同的功能分支作为源和目标分支。
+
+![image-20200306120700862](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120700862.png)
+
+## 5.6 示例
+
+下面的示例演示了`Pull Request`如何在在`Forking`工作流中使用。 也同样适用于小团队的开发协作和第三方开发者向开源项目的贡献。
+
+在示例中，小红是个开发，小明是项目维护者。他们各自有一个公开的`Bitbucket`仓库，而小明的仓库包含了正式工程。
+
+#### 小红`fork`正式项目
+
+![image-20200306120806954](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120806954.png)
+
+小红先要`fork`小明的`Bitbucket`仓库，开始项目的开发。她登陆`Bitbucket`，浏览到小明的仓库页面， 点`Fork`按钮。
+
+然后为`fork`出来的仓库填写名字和描述，这样小红就有了服务端的项目拷贝了。
+
+#### 小红克隆她的`Bitbucket`仓库
+
+![image-20200306120838453](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120838453.png)
+
+下一步，小红克隆自己刚才`fork`出来的`Bitbucket`仓库，以在本机上准备出工作拷贝。命令如下：
+
+```
+git clone https://user@bitbucket.org/user/repo.git
+```
+
+请记住，`git clone`会自动创建`origin`远程别名，是指向小红`fork`出来的仓库。
+
+#### 小红开发新功能
+
+![image-20200306120924136](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306120924136.png)
+
+在开始改代码前，小红要为新功能先新建一个新分支。她会用这个分支作为`Pull Request`的源分支。
+
+```
+git checkout -b some-feature
+# 编辑代码
+git commit -a -m "Add first draft of some feature"
+```
+
+在新功能分支上，小红按需要添加提交。甚至如果小红觉得功能分支上的提交历史太乱了，她可以用[交互式`rebase`](https://www.atlassian.com/git/tutorial/rewriting-git-history#!rebase-i)来删除或压制提交。 对于大型项目，整理功能分支的历史可以让项目维护者更容易看出在`Pull Request`中做了什么内容。
+
+#### 小红`push`功能到她的`Bitbucket`仓库中
+
+![image-20200306121030940](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306121030940.png)
+
+小红完成了功能后，`push`功能到她自己的`Bitbucket`仓库中（不是正式仓库），用下面简单的命令：
+
+```
+git push origin some-branch
+```
+
+#### 小红发起`Pull Request`
+
+![image-20200306121113048](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306121113048.png)
+
+`Bitbucket`上有了她的功能分支后，小红可以用她的`Bitbucket`账号浏览到她的`fork`出来的仓库页面， 点右上角的【`Pull Request`】按钮，发起一个`Pull Request`。 弹出的表单自动设置小红的仓库为源仓库，询问小红以指定源分支、目标仓库和目标分支。
+
+小红想要合并功能到正式仓库，所以源分支是她的功能分支，目标仓库是小明的公开仓库， 而目标分支是`master`分支。另外，小红需要提供`Pull Request`的标题和描述信息。 如果需要小明以外的人审核批准代码，她可以把这些人填在【Reviewers】文本框中。
+
+创建好了`Pull Request`，通知会通过`Bitbucket`系统消息或邮件（可选）发给小明。
+
+#### 小明review `Pull Request`
+
+在小明的`Bitbucket`仓库页面的【`Pull Request`】Tab可以看到所有人发起的`Pull Request`。 点击小红的`Pull Request`会显示出`Pull Request`的描述、功能的提交历史和每个变更的差异（`diff`）。
+
+如果小明想要合并到项目中，只要点一下【`Merge`】按钮，就可以同意`Pull Request`并合并到`master`分支。
+
+但如果像这个示例中一样小明发现了在小红的代码中的一个小`Bug`，要小红在合并前修复。 小明可以在整个`Pull Request`上加上评注，或是选择历史中的某个提交加上评注。
+
+![image-20200306121237430](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306121237430.png)
+
+#### 小红补加提交
+
+如果小红对反馈有任何疑问，可以在`Pull Request`中响应，把`Pull Request`当作是她功能讨论的论坛。
+
+小红在她的功能分支新加提交以解决代码问题，并`push`到她的`Bitbucket`仓库中，就像前一轮中的做法一样。 这些提交会进入的`Pull Request`，小明在原来的评注旁边可以再次`review`变更。
+
+#### 小明接受`Pull Request`
+
+最终，小明接受变更，合并功能分支到`Master`分支，并关闭`Pull Request`。 至此，功能集成到项目中，其它的项目开发者可以用标准的`git pull`命令`pull`这些变更到自己的本地仓库中。
+
+到了这里，你应该有了所有需要的工具来集成`Pull Request`到你自己的工作流。 请记住，`Pull Request`并不是为了替代任何 `基于`Git`的协作工作流`， 而是它们的一个便利的补充，让团队成员间的协作更轻松方便。
+
+# 六、企业日常开发模式探索
+
+在企业开发中，使用 Git 作为版本控制软件最看重的还是结合公司自己搭建的 [Gitlab](https://about.gitlab.com/)，将 Code Review 加入打包部署持续集成的流程中，这样，代码开发完成，提交测试前，便可以对开发人员提交的代码进行 Review，发现潜在的问题，及时指导，对于新人来讲，也能更快更好的学习。
+
+解决的需求场景如下：
+
+- 能支持日常迭代开发、紧急线上bug修复、多功能并行开发
+- 大概50人左右的团队，平日迭代项目较多，且周期短（1~2周一个迭代）
+- 能够通过tag重建整个系统
+- 支持code review
+- 所有上线的代码必须都是经过测试保证，且能自动同步到下一次的迭代中
+- 能和公司的项目管理/持续集成系统整合
+
+![image-20200306122214207](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306122214207.png)
+
+上图就是 xirong 团队在日常开发中总结出来的适合企业开发的模式，下面进行简单的介绍，方便大家学习了解，欢迎提交 Issue 进行讨论。（本模式适合敏捷开发流程，小迭代上线，传统的瀑布开发模型并没有进行测试）
+
+1. 迭代需求会、冲刺会后确定本次迭代的目标后，将迭代内容视为一个项目，在 Gitlab 上创建一个 Repository，初始化工程代码结构，根据上线日期，比如20150730上线，开出分支 release20150730、dev20150730 两个分支，dev 分支作为日常开发主干分支，release 分支作为提测打包、Code Review 的分支。
+2. 迭代开始，日常开发进行中，开发人员在 dev 分支上进行 Commit、Push 代码，并且解决掉日常协同开发中的冲突等问题，等到达到提测条件的时候，提测者，首先 Merge Master 分支上的最新代码 `git merge --no-ff origin/master` ，使得 Master 分支上的变更更新到迭代开发分支dev上面，之后，在 Gitlab 上面发起 `pull request` 请求，并指定 Code Review 人，请求的分支选择本次上线的 release 分支，即 release20150730。
+3. 被指定 Code Review 的人，对发起者的代码 Review 后，决定是否可以提交测试，若有问题，评论注释代码后，提交者对代码进行进行修改，重复步骤2，直到代码 Review 者认为 Ok。之后便可以借助自己公司的打包部署，对这些代码发布到测试环境验证。
+4. 步骤2-3重复多次后，就会达到一个稳定可发布的版本，即上线版本，上线后，将 release 版本上面最后的提交（图中0.2.4上线对应处）合并到 Master 分支上面，并打 Tag0.3。至此，一次完整的迭代开发完成。
+5. 若此次上线后，不久发现生产环境有 Bug 需要修复，则从 Tag 处新开分支 release_bugfix_20150731、dev_bugfix_20150731 ，开发人员从 dev_bugfix_20150731分支上进行开发，提测code review在 release_bugfix_20150731 分支上，具体步骤参考2-3，测试环境验证通过后，发布到线上，验证OK，合并到 Master 分支，并打 Tag0.2.3，此次 Bug 修复完毕，专为解 Bug 而生的这两个分支可以退伍了，删除release_bugfix_20150731、dev_bugfix_20150731两分支即可。（所有的历史 Commit 信息均已经提交到了 Master 分支上，不用担心丢失）
+
+这样经过上面的1-5步骤，企业日常迭代开发中的代码版本控制基本上就 Ok 了，有问题欢迎 Issue 讨论。
+
+2016-11月 更新 **Git 分支开发部署模型** 的一些使用原则如下:
+
+![image-20200306122248819](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306122248819.png)
+
+- master：master永远是线上代码，最稳定的分支，存放的是随时可供在生产环境中部署的代码，当开发活动告一段落，产生了一份新的可供部署的代码时，发布成功之后，代码才会由 aone2 提交到 master，master 分支上的代码会被更新。应用上 aone2 后禁掉所有人的 master的写权限
+- develop：保存当前最新开发成果的分支。通常这个分支上的代码也是可进行每日夜间发布的代码，只对开发负责人开放develop权限。
+- feature: 功能特性分支，每个功能特性一个 feature/ 分支，开发完成自测通过后合并入 develop 分支。可以从 master 或者develop 中拉出来。
+- hotfix: 紧急bug分支修复分支。修复上线后，可以直接合并入master。
+
+![image-20200306122418649](https://github.com/DKHEllO/flashcards/blob/develop/image/image-20200306122418649.png)
+
+Git-Develop 分支模式是基于 Git 代码库设计的一种需要严格控制发布质量和发布节奏的开发模式。develop 作为固定的持续集成和发布分支，并且分支上的代码必须经过 CodeReview 后才可以提交到 Develop 分支。它的基本流程如下：
+
+- 每一个需求/变更都单独从Master上创建一条Branch分支；
+- 用户在这个Branch分支上进行Codeing活动；
+- 代码达到发布准入条件后aone上提交Codereview，Codereview通过后代码自动合并到Develop分支；
+- 待所有计划发布的变更分支代码都合并到Develop后，系统再 rebase master 代码到Develop 分支，然后自行构建，打包，部署等动作。
+- 应用发布成功后Aone会基于Develop分支的发布版本打一个“当前线上版本Tag”基线；
+- 应用发布成功后Aone会自动把Develop分支的发布版本合并回master；
