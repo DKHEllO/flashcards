@@ -27,12 +27,12 @@ class FrenchDeck(object):
     Card(rank='A', suit='hearts')
 
     Pick a card at random, for example:
-    >> from random import choice
-    >> choice(deck)
+    >>> from random import choice
+    >>> choice(deck)
     Card(rank='3', suit='hearts')
-    >> choice(deck)
+    >>> choice(deck)
     Card(rank='K', suit='spades')
-    >> choice(deck)
+    >>> choice(deck)
     Card(rank='2', suit='clubs')
 
     现在已经可以体会到通过实现特殊方法来利用 Python 数据模型的两个好处
@@ -192,8 +192,11 @@ class Vector:
 # 取一个集合中元素的数量是一个很常见的操作，在 str、list、memoryview等类型上，这个操作必须高效。
 
 # 换句话说，len 之所以不是一个普通方法，是为了让 Python 自带的数据结构可以走后门，abs 也是同理。但是多亏了它是特殊方法，我们也可以把 len 用于自
-# 定义数据类型。这种处理方式在保持内置类型的效率和保证语言的一致性之间找到了一个平衡点，也印证了“Python 之禅”中的另外一句话：“不能让特例特殊到开始
-# 破坏既定规则。”
+# 定义数据类型。这种处理方式在保持内置类型的效率和保证语言的一致性(这个形容非常贴切，对于len这个方法内置类型和自定义类型即在表现上达到了一个统一内置
+# 类型又在性能上得到了一个保证)之间找到了一个平衡点，也印证了“Python 之禅”中的另外一句话：“不能让特例特殊到开始破坏既定规则。”。
+
+# 没有破坏规则的原因个人理解是不用去定义一个单独的特殊方法去解释内置类型的长度，而是去复用了len这个规则只不过做了特殊处理。关键在于len定义成了一个特
+# 殊方法，这个设计找到了平衡点
 
 
 # 总结
