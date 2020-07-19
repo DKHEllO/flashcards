@@ -56,6 +56,7 @@ class Vector2d:
         return tuple(self) == tuple(other)
 
     def __str__(self):
+        # 从可迭代的 Vector2d 实例中可以轻松地得到一个元组，显示为一个有序对。
         return str(tuple(self))
 
     def __abs__(self):
@@ -88,5 +89,8 @@ class Vector2d:
     def angle(self):
         return math.atan2(self.y, self.x)
 
+
 if __name__ == '__main__':
+    test = Vector2d(1, 2)
+    print(str(test))
     doctest.testmod()
